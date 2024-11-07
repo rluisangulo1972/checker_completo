@@ -3,6 +3,7 @@ services:
     build:
       context: ./backend_inicial
       dockerfile: Dockerfile
+    container_name: backend_inicial
     ports:
       - 3000:3000
   redis:
@@ -13,19 +14,25 @@ services:
     build:
       context: ./service_monitor
       dockerfile: Dockerfile
-    environment:
+    container_name: service_monitor
+    environment: # indicamos los valores que tendrán las variables de entorno 
       REDIS_HOST: redis
+      REDIS_PORT: 6379
+      BACKEND_INICIAL_NAME: backend_inicial
       BACKEND_INICIAL_HOST: backend_inicial
+      BACKEND_INICIAL_PORT: 3000
     ports:
       - 4000:4000
     depends_on:
       - redis
       - backend_inicial
   web_nginx:
-    image: nginx:alpine
+    build:
+      context: ./web_detalle
+      dockerfile: Dockerfile
+    container_name: nginx_web
     volumes:
       - ./web_detalle/index.html:/usr/share/nginx/html/index.html
-      #- ./web_detalle/nginx.conf:/etc/nginx/conf.d/default.conf # no es necesario
     ports:
       - 8080:80
     
