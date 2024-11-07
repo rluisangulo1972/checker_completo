@@ -1,8 +1,9 @@
 services:
   backend_inicial:
-    build:
-      context: ./backend_inicial
-      dockerfile: Dockerfile
+    #build:
+    #  context: ./backend_inicial
+    #  dockerfile: Dockerfile
+    image: rluisangulo/checker_completo-backend_inicial
     container_name: backend_inicial
     ports:
       - 3000:3000
@@ -11,9 +12,10 @@ services:
     ports:
       - 6379:6379
   service_monitor:
-    build:
-      context: ./service_monitor
-      dockerfile: Dockerfile
+    #build:
+    #  context: ./service_monitor
+    #  dockerfile: Dockerfile
+    image: rluisangulo1972/checker_completo-service_monitor
     container_name: service_monitor
     environment: # indicamos los valores que tendrán las variables de entorno 
       REDIS_HOST: redis
@@ -27,9 +29,10 @@ services:
       - redis
       - backend_inicial
   web_nginx:
-    build:
-      context: ./web_detalle
-      dockerfile: Dockerfile
+    #build:
+    #  context: ./web_detalle
+    #  dockerfile: Dockerfile
+    image: rluisangulo1972/checker_completo-web_nginx
     container_name: nginx_web
     volumes:
       - ./web_detalle/index.html:/usr/share/nginx/html/index.html
