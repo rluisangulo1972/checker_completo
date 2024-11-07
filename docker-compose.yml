@@ -3,7 +3,7 @@ services:
     #build:
     #  context: ./backend_inicial
     #  dockerfile: Dockerfile
-    image: rluisangulo/checker_completo-backend_inicial
+    image: rluisangulo1972/checker_completo-backend_inicial
     container_name: backend_inicial
     ports:
       - 3000:3000
